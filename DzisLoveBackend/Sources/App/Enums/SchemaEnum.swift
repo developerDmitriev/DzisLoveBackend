@@ -9,4 +9,5 @@ import Foundation
 
 enum Schema: String {
     case users
+    case articles
 }
