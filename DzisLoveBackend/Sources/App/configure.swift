@@ -19,8 +19,10 @@ public func configure(_ app: Application) async throws {
 
     //MARK: - Migration Setup
     app.migrations.add(UserModelMigration())
+    app.migrations.add(TokenModelMigration())
     app.migrations.add(ArticleModelMigration())
     
+    app.migrations.add(CreateUserSeeds())
     
     try await app.autoMigrate()
     try routes(app)

@@ -99,5 +99,24 @@ final class UserModel: Model {
     }
 }
 
+extension UserModel {
+    func isAdmin() -> Bool {
+        return self.role == UserRoleEnum.admin.rawValue
+    }
+}
+
 extension UserModel: Content {
 }
+
+extension UserModel:Authenticatable {}
+
+extension UserModel: ModelAuthenticatable {
+    static let usernameKey = \UserModel.$email
+    static let passwordHashKey = \UserModel.$password
+    
+    func verify(password: String) throws -> Bool {
+        try Bcrypt.verify(password, created: self.password)
+    }
+}
+extension UserModel: ModelSessionAuthenticatable {}
+extension UserModel: ModelCredentialsAuthenticatable {}
