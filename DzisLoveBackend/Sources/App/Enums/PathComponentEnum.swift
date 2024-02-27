@@ -10,6 +10,8 @@ import Vapor
 
 enum PathComponentEnum: String {
     case auth
+    case articles
+    case users
     
     var path: PathComponent {
         switch self {
